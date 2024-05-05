@@ -1,4 +1,9 @@
-interface Question {
+export interface ISubject {
+  label: string;
+  questions: IQuestion[];
+}
+
+export interface IQuestion {
   question: string;
   similarQuestions?: string[];
   answer: string;
@@ -6,7 +11,7 @@ interface Question {
   mainKeywords?: string[];
 }
 
-export function generateSampleQuestion(): Question {
+export function generateSampleQuestion(): IQuestion {
   const rawAnswer = `<strong>ATP</strong>는 <strong class="keyword">사람의 몸에서 사용하는 에너지원</strong>으로 탄수화물, 지방, 단백질의 대사작용을 통해 몸이 즉시 사용할 수 있는 ATP 에너지를 만듭니다.`;
   const answer = rawAnswer.replace(/\n/g, ' <br />');
   const [keywords, mainKeywords] = extractKeywords(answer);
