@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { IQuestion } from '../types';
 import { css } from '../../styled-system/css';
 
@@ -50,24 +50,28 @@ const buttonStyle = {
   _last: { marginRight: '0' },
 };
 
-function ReversibleCard({ questions, shuffle }: IProps) {
+function ReversibleCard({ questions, shuffle = true }: IProps) {
   const questionsCount = questions.length;
-  const cards = shuffle ? questions.slice().sort(() => Math.random() - 0.5) : questions;
+  const [cards, setCards] = useState<IQuestion[]>([]);
   const [position, setPosition] = useState(0);
   const [isFront, setIsFront] = useState(true);
+
+  const card = cards[position];
+  const content = isFront ? card?.question : card?.answer;
+
+  useEffect(() => {
+    setCards(shuffle ? questions.slice().sort(() => Math.random() - 0.5) : questions.slice());
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const next = () => {
     setPosition((position) => (position + 1) % questionsCount);
     setIsFront(true);
   };
-
   const swapLabel = isFront ? '정답 보기' : '질문 보기';
   const swap = () => {
     setIsFront(!isFront);
   };
-
-  const card = cards[position];
-  const content = isFront ? card.question : card.answer;
 
   return (
     <div className={css(cardContainerStyle)}>
