@@ -1,13 +1,16 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-import './App.css';
+import { useAtom } from 'jotai';
 import { IQuestion, ISubject } from './types';
+import './App.css';
+import { questionsAtom } from './atoms';
 
 const SPEAKING_INDEX_URL = import.meta.env.VITE_SPEAKING_INDEX_URL;
 
 function App() {
   const [subjects, setSubjects] = useState<ISubject[]>([]);
-  const [questions, setQuestions] = useState<IQuestion[]>([]);
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [_, setQuestions] = useAtom(questionsAtom);
 
   useEffect(() => {
     async function fetchSpeakingIndex() {
@@ -28,6 +31,7 @@ function App() {
     }
 
     fetchSpeakingIndex();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
