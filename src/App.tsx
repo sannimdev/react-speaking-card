@@ -17,13 +17,11 @@ function App() {
       try {
         const response = await axios.get(SPEAKING_INDEX_URL);
         const subjects = response.data as ISubject[];
-
-        setSubjects(subjects);
-
         const questions = subjects.reduce((result: IQuestion[], subject) => {
           return [...result, ...subject.questions];
         }, []);
 
+        setSubjects(subjects);
         setQuestions(questions);
       } catch (error) {
         console.error(error);
