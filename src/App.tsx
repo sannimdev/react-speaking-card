@@ -1,9 +1,10 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useAtom } from 'jotai';
-import { IQuestion, ISubject } from './types';
-import './App.css';
 import { questionsAtom } from './atoms';
+import { IQuestion, ISubject } from './types';
+import { css } from '../styled-system/css';
+import ResponsiveLayout from './components/ResponsiveLayout';
 
 const SPEAKING_INDEX_URL = import.meta.env.VITE_SPEAKING_INDEX_URL;
 
@@ -33,9 +34,9 @@ function App() {
   }, []);
 
   return (
-    <div>
+    <ResponsiveLayout>
       <section>
-        <h1>과목 선택</h1>
+        <h1 className={css({ color: 'primary' })}>과목 선택</h1>
         <ul>
           <li>
             <button>전체</button>
@@ -47,7 +48,7 @@ function App() {
           ))}
         </ul>
       </section>
-    </div>
+    </ResponsiveLayout>
   );
 }
 
