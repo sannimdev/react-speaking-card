@@ -2,7 +2,6 @@ import { defineConfig, defineGlobalStyles } from '@pandacss/dev';
 
 const globalCss = defineGlobalStyles({
   'html, body': {
-    lineHeight: '1.5',
     boxSizing: 'border-box',
   },
 });

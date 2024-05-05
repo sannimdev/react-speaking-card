@@ -14,12 +14,12 @@ const cardContainerStyle = {
 const cardContentStyle = {
   width: '100%',
   height: '50vh',
-  textIndent: '8px',
   margin: '16px 0',
   padding: '24px',
   borderWidth: '1px',
   borderColor: 'gray',
   borderRadius: '8px',
+  fontSize: '1.2rem',
 
   '& table, & th, & td': {
     borderWidth: '1px',
@@ -31,6 +31,11 @@ const cardContentStyle = {
     listStyleType: 'decimal',
     paddingLeft: '1.5em',
   },
+};
+
+const navigatorStyle = {
+  textAlign: 'right',
+  fontSize: '0.9rem;',
 };
 
 const buttonControllerStyle = {
@@ -65,6 +70,9 @@ function ReversibleCard({ questions, shuffle }: IProps) {
 
   return (
     <div className={css(cardContainerStyle)}>
+      <div className={css(navigatorStyle)}>
+        ({position}/{questionsCount})
+      </div>
       <div className={css(cardContentStyle)} dangerouslySetInnerHTML={{ __html: content }} />
       <div className={css(buttonControllerStyle)}>
         <button className={css(buttonStyle)} onClick={swap}>
