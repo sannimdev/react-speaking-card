@@ -20,6 +20,7 @@ const cardContentStyle = {
   borderColor: 'gray',
   borderRadius: '8px',
   fontSize: '1.2rem',
+  overflowY: 'scroll',
 
   '& table, & th, & td': {
     borderWidth: '1px',
