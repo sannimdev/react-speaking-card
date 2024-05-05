@@ -3,15 +3,16 @@ import axios from 'axios';
 import { useAtom } from 'jotai';
 import { questionsAtom } from './atoms';
 import { IQuestion, ISubject } from './types';
-import { css } from '../styled-system/css';
 import ResponsiveLayout from './components/ResponsiveLayout';
+import ReversibleCard from './components/ReversibleCard';
 
 const SPEAKING_INDEX_URL = import.meta.env.VITE_SPEAKING_INDEX_URL;
 
 function App() {
-  const [subjects, setSubjects] = useState<ISubject[]>([]);
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [_, setQuestions] = useAtom(questionsAtom);
+  const [_, setSubjects] = useState<ISubject[]>([]);
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [questions, setQuestions] = useAtom(questionsAtom);
 
   useEffect(() => {
     async function fetchSpeakingIndex() {
@@ -35,7 +36,8 @@ function App() {
 
   return (
     <ResponsiveLayout>
-      <section>
+      {questions.length && <ReversibleCard questions={questions} />}
+      {/* <section>
         <h1 className={css({ color: 'primary' })}>과목 선택</h1>
         <ul>
           <li>
@@ -47,7 +49,7 @@ function App() {
             </li>
           ))}
         </ul>
-      </section>
+      </section> */}
     </ResponsiveLayout>
   );
 }
