@@ -19,7 +19,7 @@ const cardContentStyle = {
   borderWidth: '1px',
   borderColor: 'gray',
   borderRadius: '8px',
-  fontSize: '1.2rem',
+  fontSize: '1.1rem',
   overflowY: 'scroll',
 
   '& table, & th, & td': {
@@ -50,7 +50,7 @@ const buttonStyle = {
   _last: { marginRight: '0' },
 };
 
-function ReversibleCard({ questions, shuffle = true /* 임시 */ }: IProps) {
+function ReversibleCard({ questions, shuffle }: IProps) {
   const questionsCount = questions.length;
   const cards = shuffle ? questions.slice().sort(() => Math.random() - 0.5) : questions;
   const [position, setPosition] = useState(0);
