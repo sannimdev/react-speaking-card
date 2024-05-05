@@ -15,7 +15,7 @@ const cardContentStyle = {
   width: '100%',
   height: '60vh',
   margin: '16px 0',
-  padding: '24px',
+  padding: '16px',
   borderWidth: '1px',
   borderColor: 'gray',
   borderRadius: '8px',
@@ -50,7 +50,7 @@ const buttonStyle = {
   _last: { marginRight: '0' },
 };
 
-function ReversibleCard({ questions, shuffle }: IProps) {
+function ReversibleCard({ questions, shuffle = true /* 임시 */ }: IProps) {
   const questionsCount = questions.length;
   const cards = shuffle ? questions.slice().sort(() => Math.random() - 0.5) : questions;
   const [position, setPosition] = useState(0);
@@ -72,7 +72,7 @@ function ReversibleCard({ questions, shuffle }: IProps) {
   return (
     <div className={css(cardContainerStyle)}>
       <div className={css(navigatorStyle)}>
-        ({position}/{questionsCount})
+        ({position + 1}/{questionsCount})
       </div>
       <div className={css(cardContentStyle)} dangerouslySetInnerHTML={{ __html: content }} />
       <div className={css(buttonControllerStyle)}>
