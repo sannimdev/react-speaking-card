@@ -50,7 +50,7 @@ const buttonStyle = {
   _last: { marginRight: '0' },
 };
 
-function ReversibleCard({ questions, shuffle = true }: IProps) {
+function ReversibleCard({ questions, shuffle }: IProps) {
   const questionsCount = questions.length;
   const [cards, setCards] = useState<IQuestion[]>([]);
   const [position, setPosition] = useState(0);

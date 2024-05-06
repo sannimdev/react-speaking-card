@@ -18,5 +18,5 @@ function CardRenderComponent() {
       ? allQuestions
       : subjects.find(({ id }) => id === subjectId)?.questions;
 
-  return <ReversibleCard questions={questions || []} />;
+  return <ReversibleCard questions={questions || []} shuffle={subjectId === 'all'} />;
 }
