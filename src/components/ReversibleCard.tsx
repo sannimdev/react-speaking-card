@@ -1,7 +1,10 @@
 import { useEffect, useState } from 'react';
 import { IQuestion } from '../types';
 import { css } from '../../styled-system/css';
+import AudioController from './AudioController';
 import useAudioEasterEgg from '../hooks/useAudioEasterEgg';
+import { audioAutoPlayAtom } from '../atoms';
+import { useAtom } from 'jotai';
 
 interface IProps {
   questions: IQuestion[];
@@ -51,16 +54,10 @@ const buttonStyle = {
   _last: { marginRight: '0' },
 };
 
-const soundControllerStyle = {
-  marginTop: '8px',
-  display: 'flex',
-  flexDirection: 'row',
-  justifyContent: 'center',
-};
-
 function ReversibleCard({ questions, shuffle }: IProps) {
   const questionsCount = questions.length;
-  const { audioEasterEgg, triggerAudioEasterEgg } = useAudioEasterEgg();
+  const [audioAutoPlay, setAudioAutoPlay] = useAtom(audioAutoPlayAtom);
+  const { triggerAudioEasterEgg } = useAudioEasterEgg();
 
   const [cards, setCards] = useState<IQuestion[]>([]);
   const [position, setPosition] = useState(0);
@@ -88,6 +85,8 @@ function ReversibleCard({ questions, shuffle }: IProps) {
     setIsFront(!isFront);
   };
 
+  const audioSource = card?.audio && isFront ? card?.audio?.question : card?.audio?.answer;
+
   return (
     <div className={css(cardContainerStyle)}>
       <div className={css(navigatorStyle)} onClick={triggerAudioEasterEgg}>
@@ -105,21 +104,12 @@ function ReversibleCard({ questions, shuffle }: IProps) {
           다음
         </button>
       </div>
-      {/* TODO: 컴포넌트 만들기 */}
-      {audioEasterEgg > 15 && card?.audio && isFront && (
-        <div className={css(soundControllerStyle)}>
-          <audio controls>
-            <source src={card.audio.question} type="audio/mp4" />이 브라우저는 오디오 요소를 지원하지 않습니다.
-          </audio>
-        </div>
-      )}
-      {audioEasterEgg > 15 && card?.audio && !isFront && (
-        <div className={css(soundControllerStyle)}>
-          <audio controls>
-            <source src={card.audio.answer} type="audio/mp4" />이 브라우저는 오디오 요소를 지원하지 않습니다.
-          </audio>
-        </div>
-      )}
+
+      <AudioController
+        src={audioSource}
+        autoPlay={audioAutoPlay}
+        onAutoPlayChecked={() => setAudioAutoPlay(!audioAutoPlay)}
+      />
     </div>
   );
 }

@@ -5,3 +5,5 @@ export const subjectsAtom = atom<ISubject[]>([]);
 export const allQuestionsAtom = atom<IQuestion[]>([]);
 
 export const audioEasterEggAtom = atom(0);
+
+export const audioAutoPlayAtom = atom(false);
