@@ -1,5 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { css } from '../../styled-system/css';
+import { useAtom } from 'jotai';
+import { audioEasterEggAtom } from '../atoms';
 
 const soundControllerStyle = {
   marginTop: '8px',
@@ -99,6 +101,10 @@ function AudioController({ src, autoPlay = false, onAutoPlayChecked }: Props) {
   const handleAutoPlayChecked = () => {
     onAutoPlayChecked?.(true);
   };
+
+  // TODO: 이스터에그
+  const [audioEasterEgg] = useAtom(audioEasterEggAtom);
+  if (audioEasterEgg < 15) return null;
 
   return (
     <div className={css(soundControllerStyle)}>

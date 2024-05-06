@@ -105,11 +105,13 @@ function ReversibleCard({ questions, shuffle }: IProps) {
         </button>
       </div>
 
-      <AudioController
-        src={audioSource}
-        autoPlay={audioAutoPlay}
-        onAutoPlayChecked={() => setAudioAutoPlay(!audioAutoPlay)}
-      />
+      {audioSource && (
+        <AudioController
+          src={audioSource}
+          autoPlay={audioAutoPlay}
+          onAutoPlayChecked={() => setAudioAutoPlay(!audioAutoPlay)}
+        />
+      )}
     </div>
   );
 }
