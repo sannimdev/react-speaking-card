@@ -10,6 +10,10 @@ export interface IQuestion {
   answer: string;
   keywords?: string[];
   mainKeywords?: string[];
+  audio?: {
+    question?: string;
+    answer?: string;
+  };
 }
 
 export function generateSampleQuestion(): IQuestion {
