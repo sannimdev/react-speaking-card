@@ -15,7 +15,7 @@ const cardContentStyle = {
   width: '100%',
   height: '60vh',
   margin: '16px 0',
-  padding: '16px',
+  padding: '8px',
   borderWidth: '1px',
   borderColor: 'gray',
   borderRadius: '8px',
