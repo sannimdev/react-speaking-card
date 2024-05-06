@@ -1,4 +1,5 @@
 import { atom } from 'jotai';
-import { IQuestion } from './types';
+import { IQuestion, ISubject } from './types';
 
-export const questionsAtom = atom<IQuestion[]>([]);
+export const subjectsAtom = atom<ISubject[]>([]);
+export const allQuestionsAtom = atom<IQuestion[]>([]);

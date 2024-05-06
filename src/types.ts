@@ -1,4 +1,5 @@
 export interface ISubject {
+  id: string;
   label: string;
   questions: IQuestion[];
 }

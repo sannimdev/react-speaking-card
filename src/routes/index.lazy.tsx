@@ -1,57 +1,35 @@
-import { createLazyFileRoute } from '@tanstack/react-router';
-import { useAtom } from 'jotai';
-import { useEffect, useState } from 'react';
-import axios from 'axios';
-import { SPEAKING_INDEX_URL } from '../constants';
-import { questionsAtom } from '../atoms';
-import { IQuestion, ISubject } from '../types';
-import ReversibleCard from '../components/ReversibleCard';
+import { Link, createLazyFileRoute } from '@tanstack/react-router';
+import { css } from '../../styled-system/css';
+import useSpeakingCard from '../hooks/useSpeakingCard';
 
 export const Route = createLazyFileRoute('/')({
   component: Index,
 });
 
 function Index() {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [_, setSubjects] = useState<ISubject[]>([]);
-  const [questions, setQuestions] = useAtom(questionsAtom);
-
-  useEffect(() => {
-    async function fetchSpeakingIndex() {
-      try {
-        const response = await axios.get(SPEAKING_INDEX_URL);
-        const subjects = response.data as ISubject[];
-        const questions = subjects.reduce((result: IQuestion[], subject) => {
-          return [...result, ...subject.questions];
-        }, []);
-
-        setSubjects(subjects);
-        setQuestions(questions);
-      } catch (error) {
-        console.error(error);
-      }
-    }
-
-    fetchSpeakingIndex();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  const { subjects } = useSpeakingCard();
 
   return (
     <>
-      {questions.length && <ReversibleCard questions={questions} />}
-      {/* <section>
-        <h1 className={css({ color: 'primary' })}>과목 선택</h1>
+      {/* {questions.length && <ReversibleCard questions={questions} />} */}
+      <section>
+        <h2 className={css({ color: 'primary' })}>과목 선택</h2>
+        <hr />
         <ul>
           <li>
-            <button>전체</button>
+            <Link to={'/card/all'}>
+              <button>전체 보기</button>
+            </Link>
           </li>
           {subjects.map((subject) => (
             <li key={subject.label}>
-              <button>{subject.label}</button>
+              <Link to={`/card/${subject.id}`}>
+                <button>{subject.label}</button>
+              </Link>
             </li>
           ))}
         </ul>
-      </section> */}
+      </section>
     </>
   );
 }
