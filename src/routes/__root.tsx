@@ -8,6 +8,8 @@ const routeBoxStyle = {
   flex: '1',
 };
 
+const isDevelopmentMode = process.env.NODE_ENV === 'development';
+
 export const Route = createRootRoute({
   component: () => (
     <>
@@ -17,7 +19,8 @@ export const Route = createRootRoute({
         </h1>
         <Outlet />
       </div>
-      <TanStackRouterDevtools />
+
+      {isDevelopmentMode && <TanStackRouterDevtools />}
     </>
   ),
 });
