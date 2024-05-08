@@ -26,6 +26,18 @@ const cardContentStyle = {
   fontSize: '1.1rem',
   overflowY: 'scroll',
 
+  '& table': {
+    width: '100%',
+  },
+
+  '& table tr.strong-under-line': {
+    borderBottomWidth: '1.5px',
+  },
+
+  '& table td': {
+    minWidth: '4vw',
+  },
+
   '& table, & th, & td': {
     borderWidth: '1px',
     borderColor: 'gray',
