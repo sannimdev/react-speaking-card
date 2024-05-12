@@ -65,7 +65,6 @@ function AudioController({ src, autoPlay = false, onAutoPlayChecked }: Props) {
 
     if (audioRef.current) {
       audioRef.current.src = src;
-      console.log(speed, '배속');
       audioRef.current.load();
       audioRef.current.playbackRate = speed;
       if (autoPlay) {
@@ -80,17 +79,17 @@ function AudioController({ src, autoPlay = false, onAutoPlayChecked }: Props) {
 
   useEffect(() => {
     const audioEl = audioRef.current;
-    const handleEnded = () => {
+    const replayUntilRepeatCount = () => {
       if (isRepeat && playCount < REPEAT_COUNT) {
         audioEl?.play();
         setPlayCount(playCount + 1);
       }
     };
 
-    audioEl?.addEventListener('ended', handleEnded);
+    audioEl?.addEventListener('ended', replayUntilRepeatCount);
 
     return () => {
-      audioEl?.removeEventListener('ended', handleEnded);
+      audioEl?.removeEventListener('ended', replayUntilRepeatCount);
     };
   }, [isRepeat, playCount]);
 
@@ -106,6 +105,7 @@ function AudioController({ src, autoPlay = false, onAutoPlayChecked }: Props) {
       audioRef.current.pause();
       audioRef.current.currentTime = 0;
     }
+    setPlayCount(0);
   };
 
   const toggleRepeat = () => {
@@ -151,10 +151,15 @@ function AudioController({ src, autoPlay = false, onAutoPlayChecked }: Props) {
         </ul>
       </form>
       <div className={css(optionsStyle)}>
-        <audio controls autoPlay={autoPlay} ref={audioRef}>
-          <source src={src} type="audio/mp4" />
-          <p>이 브라우저는 오디오 요소를 지원하지 않습니다.</p>
-        </audio>
+        <div>
+          <audio controls autoPlay={autoPlay} ref={audioRef}>
+            <source src={src} type="audio/mp4" />
+            <p>이 브라우저는 오디오 요소를 지원하지 않습니다.</p>
+          </audio>
+          <p>
+            ({playCount + 1}/{REPEAT_COUNT})
+          </p>
+        </div>
         <ul>
           <li>
             <label>
