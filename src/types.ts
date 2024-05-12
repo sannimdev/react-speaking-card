@@ -1,3 +1,7 @@
+export interface IEncryptedData {
+  encryptedData: string;
+}
+
 export interface ISubject {
   id: string;
   label: string;
