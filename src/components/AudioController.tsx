@@ -50,8 +50,11 @@ interface Props {
   onAutoPlayChecked?: (checked: boolean) => void;
 }
 
+const REPEAT_COUNT = 50;
+
 function AudioController({ src, autoPlay = false, onAutoPlayChecked }: Props) {
   const [isRepeat, setIsRepeat] = useState(false);
+  const [playCount, setPlayCount] = useState(0);
   const [speed, setSpeed] = useState(1.0);
   const speedButtonLabel = speed === 1 ? '빠르게' : '평속';
 
@@ -69,8 +72,27 @@ function AudioController({ src, autoPlay = false, onAutoPlayChecked }: Props) {
         audioRef.current.play();
       }
     }
+
+    // 리셋 플레이 카운트
+    setPlayCount(0);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [src, autoPlay]);
+
+  useEffect(() => {
+    const audioEl = audioRef.current;
+    const handleEnded = () => {
+      if (isRepeat && playCount < REPEAT_COUNT) {
+        audioEl?.play();
+        setPlayCount(playCount + 1);
+      }
+    };
+
+    audioEl?.addEventListener('ended', handleEnded);
+
+    return () => {
+      audioEl?.removeEventListener('ended', handleEnded);
+    };
+  }, [isRepeat, playCount]);
 
   const play = () => {
     if (audioRef.current) {
@@ -88,6 +110,7 @@ function AudioController({ src, autoPlay = false, onAutoPlayChecked }: Props) {
 
   const toggleRepeat = () => {
     setIsRepeat(!isRepeat);
+    if (!isRepeat) setPlayCount(0);
   };
 
   const toggleSpeed = () => {
@@ -128,7 +151,7 @@ function AudioController({ src, autoPlay = false, onAutoPlayChecked }: Props) {
         </ul>
       </form>
       <div className={css(optionsStyle)}>
-        <audio controls autoPlay={autoPlay} loop={isRepeat} ref={audioRef}>
+        <audio controls autoPlay={autoPlay} ref={audioRef}>
           <source src={src} type="audio/mp4" />
           <p>이 브라우저는 오디오 요소를 지원하지 않습니다.</p>
         </audio>
