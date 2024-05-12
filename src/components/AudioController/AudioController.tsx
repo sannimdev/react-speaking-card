@@ -86,7 +86,7 @@ function AudioController({ src, autoPlay = false, onAutoPlayChecked }: IAudioCon
             <source src={src} type="audio/mp4" />
             <p>이 브라우저는 오디오 요소를 지원하지 않습니다.</p>
           </audio>
-          <p>
+          <p className={css({ fontSize: '0.8rem', textAlign: 'center' })}>
             ({playCount + 1}/{maxRepeatCount})
           </p>
         </div>
