@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { IQuestion } from '../types';
 import { css } from '../../styled-system/css';
-import AudioController from './AudioController';
+import AudioController from './AudioController/AudioController';
 import useAudioEasterEgg from '../hooks/useAudioEasterEgg';
 import { audioAutoPlayAtom } from '../atoms';
 import { useAtom } from 'jotai';
@@ -93,6 +93,7 @@ function ReversibleCard({ questions, shuffle, subject }: IProps) {
     setPosition((position) => (position + 1) % questionsCount);
     setIsFront(true);
   };
+
   const swapLabel = isFront ? '정답 보기' : '질문 보기';
   const swap = () => {
     setIsFront(!isFront);
