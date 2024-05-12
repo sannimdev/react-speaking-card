@@ -1,16 +1,7 @@
-import { useEffect, useState } from 'react';
-import { IQuestion } from '../types';
-import { css } from '../../styled-system/css';
-import AudioController from './AudioController/AudioController';
-import useAudioEasterEgg from '../hooks/useAudioEasterEgg';
-import { audioAutoPlayAtom } from '../atoms';
-import { useAtom } from 'jotai';
-
-interface IProps {
-  questions: IQuestion[];
-  shuffle?: boolean;
-  subject?: string;
-}
+import { css } from '../../../styled-system/css';
+import AudioController from '../AudioController';
+import { IReversibleCardProps } from './types';
+import useReversibleCard from './useReversibleCard';
 
 const cardContainerStyle = {
   width: '100%',
@@ -67,39 +58,12 @@ const buttonStyle = {
   _last: { marginRight: '0' },
 };
 
-function ReversibleCard({ questions, shuffle, subject }: IProps) {
-  const questionsCount = questions.length;
-  const [audioAutoPlay, setAudioAutoPlay] = useAtom(audioAutoPlayAtom);
-  const { triggerAudioEasterEgg } = useAudioEasterEgg();
-
-  const [cards, setCards] = useState<IQuestion[]>([]);
-  const [position, setPosition] = useState(0);
-  const [isFront, setIsFront] = useState(true);
-
-  const card = cards[position];
-  const content = isFront ? card?.question : card?.answer;
-
-  useEffect(() => {
-    setCards(shuffle ? questions.slice().sort(() => Math.random() - 0.5) : questions.slice());
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  const prev = () => {
-    setPosition((position) => (position - 1 >= 0 ? position - 1 : questionsCount - 1));
-    setIsFront(true);
-  };
-
-  const next = () => {
-    setPosition((position) => (position + 1) % questionsCount);
-    setIsFront(true);
-  };
-
-  const swapLabel = isFront ? '정답 보기' : '질문 보기';
-  const swap = () => {
-    setIsFront(!isFront);
-  };
-
-  const audioSource = card?.audio && isFront ? card?.audio?.question : card?.audio?.answer;
+function ReversibleCard({ questions, shuffle, subject }: IReversibleCardProps) {
+  const {
+    getter: { content, position, swapLabel, questionsCount, audioSource, audioAutoPlay },
+    setter: { setAudioAutoPlay },
+    methods: { triggerAudioEasterEgg, prev, next, swap },
+  } = useReversibleCard({ questions, shuffle });
 
   return (
     <div className={css(cardContainerStyle)}>

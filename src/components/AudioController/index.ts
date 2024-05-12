@@ -1,1 +1,1 @@
-export * from './AudioController';
+export { default } from './AudioController';
