@@ -15,7 +15,7 @@ export const Route = createRootRoute({
     <>
       <div className={css(routeBoxStyle)}>
         <h1>
-          <Link to="/">구술 암기</Link>
+          <Link to="/">구술</Link>
         </h1>
         <Outlet />
       </div>

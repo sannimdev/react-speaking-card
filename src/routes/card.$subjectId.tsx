@@ -13,10 +13,12 @@ function CardRenderComponent() {
     return null;
   }
 
+  const subject = subjects.find(({ id }) => id === subjectId);
+
   const questions =
     subjectId === 'all' //
       ? allQuestions
-      : subjects.find(({ id }) => id === subjectId)?.questions;
+      : subject?.questions;
 
-  return <ReversibleCard questions={questions || []} shuffle={subjectId === 'all'} />;
+  return <ReversibleCard questions={questions || []} shuffle={subjectId === 'all'} subject={subject?.label} />;
 }

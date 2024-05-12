@@ -9,6 +9,7 @@ import { useAtom } from 'jotai';
 interface IProps {
   questions: IQuestion[];
   shuffle?: boolean;
+  subject?: string;
 }
 
 const cardContainerStyle = {
@@ -66,7 +67,7 @@ const buttonStyle = {
   _last: { marginRight: '0' },
 };
 
-function ReversibleCard({ questions, shuffle }: IProps) {
+function ReversibleCard({ questions, shuffle, subject }: IProps) {
   const questionsCount = questions.length;
   const [audioAutoPlay, setAudioAutoPlay] = useAtom(audioAutoPlayAtom);
   const { triggerAudioEasterEgg } = useAudioEasterEgg();
@@ -101,6 +102,7 @@ function ReversibleCard({ questions, shuffle }: IProps) {
 
   return (
     <div className={css(cardContainerStyle)}>
+      <div>{subject}</div>
       <div className={css(navigatorStyle)} onClick={triggerAudioEasterEgg}>
         ({position + 1}/{questionsCount})
       </div>
