@@ -17,9 +17,17 @@ import { Route as CardSubjectIdImport } from './routes/card.$subjectId'
 
 // Create Virtual Routes
 
+const TestComponentLazyImport = createFileRoute('/test-component')()
 const IndexLazyImport = createFileRoute('/')()
 
 // Create/Update Routes
+
+const TestComponentLazyRoute = TestComponentLazyImport.update({
+  path: '/test-component',
+  getParentRoute: () => rootRoute,
+} as any).lazy(() =>
+  import('./routes/test-component.lazy').then((d) => d.Route),
+)
 
 const IndexLazyRoute = IndexLazyImport.update({
   path: '/',
@@ -39,6 +47,10 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexLazyImport
       parentRoute: typeof rootRoute
     }
+    '/test-component': {
+      preLoaderRoute: typeof TestComponentLazyImport
+      parentRoute: typeof rootRoute
+    }
     '/card/$subjectId': {
       preLoaderRoute: typeof CardSubjectIdImport
       parentRoute: typeof rootRoute
@@ -50,6 +62,7 @@ declare module '@tanstack/react-router' {
 
 export const routeTree = rootRoute.addChildren([
   IndexLazyRoute,
+  TestComponentLazyRoute,
   CardSubjectIdRoute,
 ])
 
