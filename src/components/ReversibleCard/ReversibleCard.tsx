@@ -40,7 +40,7 @@ const cardContentStyle = css({
   width: '100%',
   height: '55vh',
   margin: '8px 0',
-  padding: '16px',
+  padding: '16px 8px',
   borderWidth: '1px',
   borderColor: 'gray',
   borderRadius: '8px',
