@@ -7,7 +7,7 @@
 
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  background-color: var(--dark-bg-color);
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -51,12 +51,12 @@ button {
   font-size: 1em;
   font-weight: 500;
   font-family: inherit;
-  background-color: #1a1a1a;
+  background-color: var(--dark-button-bg-color);
   cursor: pointer;
   transition: border-color 0.25s;
 }
 button:hover {
-  border-color: #646cff;
+  border-color: var(--dark-skyblue-100);
 }
 button:focus,
 button:focus-visible {
@@ -64,22 +64,34 @@ button:focus-visible {
 }
 
 strong.keyword {
-  color: #ffe066;
+  color: var(--dark-yellow-100);
 }
 
 @media (prefers-color-scheme: light) {
   :root {
-    color: #213547;
-    background-color: #ffffff;
+    color: var(--light-font-color);
+    background-color: var(--light-bg-color);
   }
   a:hover {
-    color: #747bff;
+    color: var(--light-skyblue-100);
   }
   button {
-    background-color: #f9f9f9;
+    background-color: var(--light-bg-color);
   }
 
   strong.keyword {
-    color: #e03131;
+    color: var(--dark-red-100);
   }
+}
+
+:root {
+  --dark-bg-color: #242424;
+  --dark-button-bg-color: #1a1a1a;
+  --dark-yellow-100: #ffe066;
+  --dark-red-100: #e03131;
+  --dark-skyblue-100: #646cff;
+
+  --light-font-color: #213547;
+  --light-bg-color: #ffffff;
+  --light-skyblue-100: #747bff;
 }
