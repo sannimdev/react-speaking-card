@@ -1,10 +1,15 @@
-import { createFileRoute } from '@tanstack/react-router';
+import { Link, createFileRoute } from '@tanstack/react-router';
 import ReversibleCard from '../components/ReversibleCard';
 import useSpeakingCard from '../hooks/useSpeakingCard';
+import { css } from '../../styled-system/css';
 
 export const Route = createFileRoute('/card/$subjectId')({
   component: CardRenderComponent,
 });
+
+const gnbStyle = {
+  display: 'flex',
+};
 
 function CardRenderComponent() {
   const { subjectId } = Route.useParams();
@@ -20,5 +25,15 @@ function CardRenderComponent() {
       ? allQuestions
       : subject?.questions;
 
-  return <ReversibleCard questions={questions || []} shuffle={subjectId === 'all'} subject={subject?.label} />;
+  return (
+    <>
+      <div className={css(gnbStyle)}>
+        <h1>
+          <Link to="/">구술카드</Link>
+        </h1>
+        &gt; {subject?.label}
+      </div>
+      <ReversibleCard questions={questions || []} shuffle={subjectId === 'all'} subject={subject?.label} />
+    </>
+  );
 }

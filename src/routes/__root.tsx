@@ -14,9 +14,6 @@ export const Route = createRootRoute({
   component: () => (
     <>
       <div className={css(routeBoxStyle)}>
-        <h1>
-          <Link to="/">구술</Link>
-        </h1>
         <Outlet />
       </div>
 

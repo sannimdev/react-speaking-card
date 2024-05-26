@@ -18,6 +18,10 @@ export interface IQuestion {
     question?: string;
     answer?: string;
   };
+  scores?: {
+    chatgpt_4o?: number;
+    claude_opus?: number;
+  };
 }
 
 export function generateSampleQuestion(): IQuestion {
