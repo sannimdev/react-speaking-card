@@ -27,6 +27,7 @@ const headerStyle = css({
 const badgeStyle = css({
   display: 'flex',
   alignItems: 'center',
+  height: '24px',
 });
 
 const scoreStyle = css({
@@ -121,8 +122,14 @@ function ReversibleCard({ questions, shuffle }: IReversibleCardProps) {
     <div className={cardContainerStyle}>
       <div className={headerStyle} onClick={triggerAudioEasterEgg}>
         <div className={badgeStyle}>
-          <Badge>{score}</Badge>
-          <span className={scoreStyle}>Score</span>
+          {score ? (
+            <>
+              <Badge>{score}</Badge>
+              <span className={scoreStyle}>Score</span>
+            </>
+          ) : (
+            ''
+          )}
         </div>
         <p>
           {position + 1}/{questionsCount} Questions
