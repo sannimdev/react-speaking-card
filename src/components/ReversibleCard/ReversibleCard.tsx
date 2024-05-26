@@ -12,44 +12,47 @@ const cardContainerStyle = css({
   boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
   backgroundColor: '#fff',
   '@media (prefers-color-scheme: dark)': {
-    backgroundColor: '#333',
+    backgroundColor: '#2a2a2a',
     color: '#fff',
   },
 });
 
-const headerStyle = css({
+const cardInformationStyle = css({
   display: 'flex',
   justifyContent: 'space-between',
   alignItems: 'center',
-  marginBottom: '16px',
+  marginTop: '8px',
 });
 
 const badgeStyle = css({
   display: 'flex',
   alignItems: 'center',
   height: '24px',
+  userSelect: 'none',
 });
 
 const scoreStyle = css({
   fontSize: '1.2rem',
   fontWeight: 'bold',
-  marginLeft: '8px',
+  marginLeft: '2px',
+  userSelect: 'none',
+  color: 'rgba(255,255,255,0.8)',
 });
 
 const cardContentStyle = css({
   width: '100%',
   height: '55vh',
   margin: '8px 0',
-  padding: '16px 8px',
+  padding: '8px',
   borderWidth: '1px',
   borderColor: 'gray',
   borderRadius: '8px',
   fontSize: '1.1rem',
-  overflowY: 'scroll',
+  overflowY: 'auto',
   backgroundColor: '#f9f9f9',
   '@media (prefers-color-scheme: dark)': {
-    backgroundColor: '#444',
-    borderColor: '#666',
+    backgroundColor: '#242424',
+    borderColor: '#404040',
   },
 
   '& table': {
@@ -120,21 +123,6 @@ function ReversibleCard({ questions, shuffle }: IReversibleCardProps) {
 
   return (
     <div className={cardContainerStyle}>
-      <div className={headerStyle} onClick={triggerAudioEasterEgg}>
-        <div className={badgeStyle}>
-          {score ? (
-            <>
-              <Badge>{score}</Badge>
-              <span className={scoreStyle}>Score</span>
-            </>
-          ) : (
-            ''
-          )}
-        </div>
-        <p>
-          {position + 1}/{questionsCount} Questions
-        </p>
-      </div>
       <div className={cardContentStyle} dangerouslySetInnerHTML={{ __html: content }} />
       <div className={buttonControllerStyle}>
         <button className={buttonStyle} onClick={prev}>
@@ -147,7 +135,21 @@ function ReversibleCard({ questions, shuffle }: IReversibleCardProps) {
           다음
         </button>
       </div>
-
+      <div className={cardInformationStyle} onClick={triggerAudioEasterEgg}>
+        <div className={badgeStyle}>
+          {score ? (
+            <>
+              <Badge>{score}</Badge>
+              <span className={scoreStyle}>점</span>
+            </>
+          ) : (
+            ''
+          )}
+        </div>
+        <p>
+          {position + 1}/{questionsCount} Questions
+        </p>
+      </div>
       {audioSource && (
         <AudioController
           src={audioSource}
