@@ -1,4 +1,5 @@
 @layer reset, base, tokens, recipes, utilities;
+@import './variables.css';
 
 :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
@@ -82,16 +83,4 @@ strong.keyword {
   strong.keyword {
     color: var(--dark-red-100);
   }
-}
-
-:root {
-  --dark-bg-color: #242424;
-  --dark-button-bg-color: #1a1a1a;
-  --dark-yellow-100: #ffe066;
-  --dark-red-100: #e03131;
-  --dark-skyblue-100: #646cff;
-
-  --light-font-color: #213547;
-  --light-bg-color: #ffffff;
-  --light-skyblue-100: #747bff;
 }
