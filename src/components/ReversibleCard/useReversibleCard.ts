@@ -17,7 +17,6 @@ const useReversibleCard = ({ questions, shuffle }: IReversibleCardProps) => {
   const card = cards[position];
   const content = isFront ? card?.question : card?.answer;
   const question = questions[position];
-  console.log(question);
   const score = question?.scores?.chatgpt_4o ?? question?.scores?.claude_opus;
 
   useEffect(() => {
