@@ -6,7 +6,7 @@ import useReversibleCard from './useReversibleCard';
 
 const cardContainerStyle = css({
   width: '100%',
-  padding: '16px',
+  padding: '8px',
   marginTop: '16px',
   borderRadius: '8px',
   boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
@@ -42,7 +42,6 @@ const scoreStyle = css({
 const cardContentStyle = css({
   width: '100%',
   height: '55vh',
-  margin: '8px 0',
   padding: '8px',
   borderWidth: '1px',
   borderColor: 'gray',

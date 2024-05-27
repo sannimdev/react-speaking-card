@@ -84,3 +84,9 @@ strong.keyword {
     color: var(--dark-red-100);
   }
 }
+
+@media (max-width: 767px) {
+  .responsive-layout {
+    width: 100vw !important;
+  }
+}

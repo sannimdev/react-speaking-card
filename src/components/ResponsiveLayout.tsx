@@ -8,13 +8,10 @@ const style = {
   padding: '16px',
   width: '768px',
   margin: '0 auto !important',
-  '@media (max-width: 767px)': {
-    width: '100vw',
-  },
 };
 
 function ResponsiveLayout({ children }: IProps) {
-  return <div className={css(style)}>{children}</div>;
+  return <div className={`responsive-layout ${css(style)}`}>{children}</div>;
 }
 
 export default ResponsiveLayout;
