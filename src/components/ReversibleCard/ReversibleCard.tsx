@@ -77,7 +77,12 @@ const cardContentStyle = css({
 
   '& ol': {
     listStyleType: 'decimal',
-    paddingLeft: '1.5em',
+    paddingLeft: '1.5rem',
+  },
+
+  '& ul': {
+    listStyleType: 'disc',
+    paddingLeft: '1.5rem',
   },
 });
 
