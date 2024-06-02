@@ -5,6 +5,7 @@ import { IReversibleCardProps } from './types';
 import useReversibleCard from './useReversibleCard';
 
 const cardContainerStyle = css({
+  alignSelf: 'flex-start',
   width: '100%',
   padding: '8px',
   marginTop: '16px',
@@ -41,7 +42,7 @@ const scoreStyle = css({
 
 const cardContentStyle = css({
   width: '100%',
-  height: '55vh',
+  height: '65vh',
   padding: '8px',
   borderWidth: '1px',
   borderColor: 'gray',
