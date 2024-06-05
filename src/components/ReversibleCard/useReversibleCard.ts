@@ -15,7 +15,10 @@ const useReversibleCard = ({ questions, shuffle }: IReversibleCardProps) => {
   const [isFront, setIsFront] = useState(true);
 
   const card = cards[position];
-  const content = isFront ? card?.question : card?.answer;
+  // TODO: REFACTORING
+  const hasSimilarQuestions = Array.isArray(card?.similarQuestions) && card.similarQuestions.length;
+  const displayedQuestion = [card?.question, ...(hasSimilarQuestions ? ['', '(또는)', ...card.similarQuestions] : [])];
+  const content = isFront ? displayedQuestion.join('<br />') : card?.answer;
   const question = questions[position];
   const score = question?.scores?.chatgpt_4o ?? question?.scores?.claude_opus;
 

@@ -10,7 +10,7 @@ export interface ISubject {
 
 export interface IQuestion {
   question: string;
-  similarQuestions?: string[];
+  similarQuestions: string[];
   answer: string;
   keywords?: string[];
   mainKeywords?: string[];
