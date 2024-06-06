@@ -20,8 +20,10 @@ const useReversibleCard = ({ questions, shuffle }: IReversibleCardProps) => {
   const displayedQuestion = [card?.question, ...(hasSimilarQuestions ? ['', '(또는)', ...card.similarQuestions] : [])];
   const content = isFront ? displayedQuestion.join('<br />') : card?.answer;
   const question = questions[position];
-  const score = question?.scores?.chatgpt_4o ?? question?.scores?.claude_opus;
-
+  const scores = {
+    gpt4o: question?.scores?.chatgpt_4o,
+    claudeOpus: question?.scores?.claude_opus,
+  };
   useEffect(() => {
     setCards(shuffle ? questions.slice().sort(() => Math.random() - 0.5) : questions.slice());
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -53,7 +55,7 @@ const useReversibleCard = ({ questions, shuffle }: IReversibleCardProps) => {
       position,
       question,
       questionsCount,
-      score,
+      scores,
     },
 
     setter: {

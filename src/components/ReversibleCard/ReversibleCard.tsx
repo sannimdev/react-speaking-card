@@ -11,10 +11,10 @@ const cardContainerStyle = css({
   marginTop: '16px',
   borderRadius: '8px',
   boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
-  backgroundColor: '#fafafa',
-  '@media (prefers-color-scheme: dark)': {
-    backgroundColor: '#2a2a2a',
-    color: '#fff',
+  backgroundColor: '#2a2a2a',
+  color: '#fff',
+  '@media (prefers-color-scheme: light)': {
+    backgroundColor: '#fafafa',
   },
 });
 
@@ -30,19 +30,16 @@ const badgeStyle = css({
   alignItems: 'center',
   height: '24px',
   userSelect: 'none',
-});
-
-const scoreStyle = css({
-  fontSize: '1.2rem',
-  fontWeight: 'bold',
-  marginLeft: '2px',
-  userSelect: 'none',
-  color: 'rgba(255,255,255,0.8)',
+  '& > li': {
+    '&:not(:last-child)': {
+      marginRight: '8px',
+    },
+  },
 });
 
 const cardContentStyle = css({
   width: '100%',
-  height: '65vh',
+  height: '62vh',
   padding: '8px',
   borderWidth: '1px',
   borderColor: 'gray',
@@ -121,7 +118,7 @@ const buttonStyle = css({
 
 function ReversibleCard({ questions, shuffle }: IReversibleCardProps) {
   const {
-    getter: { content, position, swapLabel, questionsCount, audioSource, audioAutoPlay, score },
+    getter: { content, position, swapLabel, questionsCount, audioSource, audioAutoPlay, scores },
     setter: { setAudioAutoPlay },
     methods: { triggerAudioEasterEgg, prev, next, swap },
   } = useReversibleCard({ questions, shuffle });
@@ -129,6 +126,23 @@ function ReversibleCard({ questions, shuffle }: IReversibleCardProps) {
   return (
     <div className={cardContainerStyle}>
       <div className={cardContentStyle} dangerouslySetInnerHTML={{ __html: content }} />
+      <div className={cardInformationStyle} onClick={triggerAudioEasterEgg}>
+        <ul className={badgeStyle}>
+          {scores?.gpt4o && (
+            <li>
+              G <Badge number={scores.gpt4o} />
+            </li>
+          )}
+          {scores?.claudeOpus && (
+            <li>
+              C <Badge number={scores.claudeOpus} />
+            </li>
+          )}
+        </ul>
+        <p>
+          {position + 1}/{questionsCount} Questions
+        </p>
+      </div>
       <div className={buttonControllerStyle}>
         <button className={buttonStyle} onClick={prev}>
           이전
@@ -140,21 +154,7 @@ function ReversibleCard({ questions, shuffle }: IReversibleCardProps) {
           다음
         </button>
       </div>
-      <div className={cardInformationStyle} onClick={triggerAudioEasterEgg}>
-        <div className={badgeStyle}>
-          {score ? (
-            <>
-              <Badge>{score}</Badge>
-              <span className={scoreStyle}>점</span>
-            </>
-          ) : (
-            ''
-          )}
-        </div>
-        <p>
-          {position + 1}/{questionsCount} Questions
-        </p>
-      </div>
+
       {audioSource && (
         <AudioController
           src={audioSource}
