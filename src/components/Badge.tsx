@@ -14,7 +14,7 @@ const badgeContainerStyle = css({
   color: '#000',
   '@media (prefers-color-scheme: light)': {
     backgroundColor: '#007BFF',
-    color: '#fff',
+    color: '#fff !important',
   },
 });
 

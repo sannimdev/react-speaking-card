@@ -11,7 +11,7 @@ const cardContainerStyle = css({
   marginTop: '16px',
   borderRadius: '8px',
   boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
-  backgroundColor: '#fff',
+  backgroundColor: '#fafafa',
   '@media (prefers-color-scheme: dark)': {
     backgroundColor: '#2a2a2a',
     color: '#fff',

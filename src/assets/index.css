@@ -24,7 +24,7 @@
 
 a {
   font-weight: 500;
-  color: #e0e0e0;
+  color: #f0f0f0;
   text-decoration: inherit;
 }
 
@@ -77,11 +77,19 @@ strong.keyword {
     color: var(--light-font-color);
     background-color: var(--light-bg-color);
   }
+
+  a,
+  button,
+  span {
+    color: var(--light-font-color);
+  }
+
   a:hover {
     color: var(--light-skyblue-100);
   }
+
   button {
-    background-color: var(--light-bg-color);
+    background-color: var(--light-button-bg-color);
   }
 
   strong.keyword {
