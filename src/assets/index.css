@@ -78,12 +78,11 @@ strong.keyword {
     background-color: var(--light-bg-color);
   }
 
-  a,
-  button,
-  span {
+  * {
     color: var(--light-font-color);
   }
 
+  a,
   a:hover {
     color: var(--light-skyblue-100);
   }
