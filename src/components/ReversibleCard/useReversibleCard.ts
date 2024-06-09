@@ -24,6 +24,8 @@ const useReversibleCard = ({ questions, shuffle }: IReversibleCardProps) => {
     gpt4o: question?.scores?.chatgpt_4o,
     claudeOpus: question?.scores?.claude_opus,
   };
+  const priority = question?.priority ?? 0;
+
   useEffect(() => {
     setCards(shuffle ? questions.slice().sort(() => Math.random() - 0.5) : questions.slice());
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -56,6 +58,7 @@ const useReversibleCard = ({ questions, shuffle }: IReversibleCardProps) => {
       question,
       questionsCount,
       scores,
+      priority,
     },
 
     setter: {

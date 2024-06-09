@@ -118,7 +118,7 @@ const buttonStyle = css({
 
 function ReversibleCard({ questions, shuffle }: IReversibleCardProps) {
   const {
-    getter: { content, position, swapLabel, questionsCount, audioSource, audioAutoPlay, scores },
+    getter: { content, position, swapLabel, questionsCount, audioSource, audioAutoPlay, scores, priority },
     setter: { setAudioAutoPlay },
     methods: { triggerAudioEasterEgg, prev, next, swap },
   } = useReversibleCard({ questions, shuffle });
@@ -139,9 +139,11 @@ function ReversibleCard({ questions, shuffle }: IReversibleCardProps) {
             </li>
           )}
         </ul>
-        <p>
-          {position + 1}/{questionsCount} Questions
-        </p>
+        <div>
+          <p>
+            {'🔥'.repeat(priority)} {position + 1}/{questionsCount} Questions
+          </p>
+        </div>
       </div>
       <div className={buttonControllerStyle}>
         <button className={buttonStyle} onClick={prev}>

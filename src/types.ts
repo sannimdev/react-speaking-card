@@ -22,6 +22,7 @@ export interface IQuestion {
     chatgpt_4o?: number;
     claude_opus?: number;
   };
+  priority?: number;
 }
 
 export function generateSampleQuestion(): IQuestion {
