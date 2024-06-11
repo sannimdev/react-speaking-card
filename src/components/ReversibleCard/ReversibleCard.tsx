@@ -118,14 +118,38 @@ const buttonStyle = css({
 
 function ReversibleCard({ questions, shuffle }: IReversibleCardProps) {
   const {
-    getter: { content, position, swapLabel, questionsCount, audioSource, audioAutoPlay, scores, priority },
+    getter: {
+      answer,
+      displayedQuestions,
+      isFront,
+      position,
+      swapLabel,
+      questionsCount,
+      audioSource,
+      audioAutoPlay,
+      scores,
+      priority,
+    },
     setter: { setAudioAutoPlay },
     methods: { triggerAudioEasterEgg, prev, next, swap },
   } = useReversibleCard({ questions, shuffle });
 
+  const ulDisplayedQuestions = (
+    <ul>
+      {displayedQuestions.map((question) => (
+        <li>{question}</li>
+      ))}
+    </ul>
+  );
+  const cardContent = isFront ? (
+    <div className={cardContentStyle}>{ulDisplayedQuestions}</div>
+  ) : (
+    <div className={cardContentStyle} dangerouslySetInnerHTML={{ __html: answer }} />
+  );
+
   return (
     <div className={cardContainerStyle}>
-      <div className={cardContentStyle} dangerouslySetInnerHTML={{ __html: content }} />
+      {cardContent}
       <div className={cardInformationStyle} onClick={triggerAudioEasterEgg}>
         <ul className={badgeStyle}>
           {scores?.gpt4o && (

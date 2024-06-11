@@ -17,8 +17,7 @@ const useReversibleCard = ({ questions, shuffle }: IReversibleCardProps) => {
   const card = cards[position];
   // TODO: REFACTORING
   const hasSimilarQuestions = Array.isArray(card?.similarQuestions) && card.similarQuestions.length;
-  const displayedQuestion = [card?.question, ...(hasSimilarQuestions ? ['', '(또는)', ...card.similarQuestions] : [])];
-  const content = isFront ? displayedQuestion.join('<br />') : card?.answer;
+  const displayedQuestions = [card?.question, ...(hasSimilarQuestions ? [...card.similarQuestions] : [])];
   const question = questions[position];
   const scores = {
     gpt4o: question?.scores?.chatgpt_4o,
@@ -51,7 +50,9 @@ const useReversibleCard = ({ questions, shuffle }: IReversibleCardProps) => {
   return {
     getter: {
       audioAutoPlay,
-      content,
+      answer: card?.answer || '',
+      displayedQuestions,
+      isFront,
       swapLabel,
       audioSource,
       position,
