@@ -17,7 +17,9 @@ const useReversibleCard = ({ questions, shuffle }: IReversibleCardProps) => {
   const card = cards[position];
   // TODO: REFACTORING
   const hasSimilarQuestions = Array.isArray(card?.similarQuestions) && card.similarQuestions.length;
-  const displayedQuestions = [card?.question, ...(hasSimilarQuestions ? [...card.similarQuestions] : [])];
+  const displayedQuestions = [card?.question, ...(hasSimilarQuestions ? [...card.similarQuestions] : [])].sort(
+    () => Math.random() - 0.5
+  );
   const question = questions[position];
   const scores = {
     gpt4o: question?.scores?.chatgpt_4o,
