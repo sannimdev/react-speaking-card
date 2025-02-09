@@ -1,13 +1,14 @@
 import ResponsiveLayout from './components/ResponsiveLayout';
-import { RouterProvider, createRouter } from '@tanstack/react-router';
-import { routeTree } from './routeTree.gen';
+// import { RouterProvider, createRouter } from '@tanstack/react-router';
+// import { routeTree } from './routeTree.gen';
 
-const router = createRouter({ routeTree });
+// const router = createRouter({ routeTree });
 
 function App() {
   return (
     <ResponsiveLayout>
-      <RouterProvider router={router} />
+      <div>서비스 중단</div>
+      {/* <RouterProvider router={router} /> */}
     </ResponsiveLayout>
   );
 }
